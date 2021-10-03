@@ -21,4 +21,10 @@ export class AppComponent implements OnInit {
       ));
     }
   }
+
+  onRemove(item: PurchaseDto, event: MouseEvent) {
+    // filter, map, reduce - не изменяют исходный массив
+    this.items = this.items.filter(o => o.id !== item.id);
+    debugger;
+  }
 }
