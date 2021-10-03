@@ -1,4 +1,14 @@
+<ng-template #itemCountInfo let-count="count">
+  {{count}}
+</ng-template>
+
+<ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
+</ng-template>
+
 <app-purchase-list
   [items]="items"
   (removeItem)="onRemoveItem($event)"
 ></app-purchase-list>
+
+<ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
+</ng-template>
