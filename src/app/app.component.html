@@ -1,5 +1,6 @@
-<div *ngIf="item">
+<div *ngFor="let item of items; index as i">
   <!-- ?. - ищем свойство, только если сам объект не null и не undefined -->
+  <span>#{{i + 1}}</span>
   <span>{{item.id}}</span>
   <span>{{item.name}}</span>
   <span>{{item.price}}</span>

@@ -4,17 +4,21 @@ import { PurchaseDto } from './dto/purchase-dto';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 // Alt + Insert -> generation
 // Alt + Enter -> fix
 export class AppComponent implements OnInit {
-  item?: PurchaseDto;
+  items: PurchaseDto[] = [];
 
   ngOnInit(): void {
     // инициализация первоначальной загрузки данных
-    //this.item = new PurchaseDto(1, 'Water', 100.99);
+    for (let i = 0; i < 5; i++) {
+      this.items.push(new PurchaseDto(
+        i,
+        'Water',
+        100.99 + i,
+      ));
+    }
   }
-
-  // 1. constructor
 }
