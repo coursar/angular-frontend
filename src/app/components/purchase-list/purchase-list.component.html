@@ -1,0 +1,6 @@
+<app-purchase-list-item
+  *ngFor="let item of items"
+  [item]="item"
+  (remove)="onRemoveItem($event)"
+>
+</app-purchase-list-item>
