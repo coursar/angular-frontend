@@ -19,6 +19,4 @@
 <ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
 </ng-template>
 
-<ng-template [appStructural]="items.length > 3">
-  <div>More than 3 elements</div>
-</ng-template>
+<div *appStructural="items.length > 3">More than 3 elements</div>
