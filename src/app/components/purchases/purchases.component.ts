@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PurchaseDto } from '../../dto/purchase-dto';
 
 @Component({
@@ -7,6 +7,7 @@ import { PurchaseDto } from '../../dto/purchase-dto';
   styleUrls: ['./purchases.component.css'],
 })
 export class PurchasesComponent implements OnInit {
+  attribute = '';
   items: PurchaseDto[] = [];
 
   constructor() {
@@ -24,5 +25,9 @@ export class PurchasesComponent implements OnInit {
 
   onRemoveItem($event: PurchaseDto) {
     this.items = this.items.filter(o => o.id !== $event.id);
+  }
+
+  onEnter($event: string) {
+    this.attribute = $event;
   }
 }

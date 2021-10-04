@@ -5,7 +5,10 @@
 <ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
 </ng-template>
 
+<!--[appAttribute]="attribute"-->
+<!--(appAttributeChange)="attribute=$event"-->
 <app-purchase-list
+  [(appAttribute)]="attribute"
   [items]="items"
   (removeItem)="onRemoveItem($event)"
 ></app-purchase-list>
