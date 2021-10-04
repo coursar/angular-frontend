@@ -1,10 +1,10 @@
 import { Directive, Input, OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[appRepeatable]'
+  selector: '[appRepeatableOf]'
 })
 export class RepeatableDirective implements OnChanges {
-  @Input() appRepeatable: any[] = [];
+  @Input() appRepeatableOf: any[] = [];
 
   constructor(
     private container: ViewContainerRef,
@@ -13,10 +13,10 @@ export class RepeatableDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.container.clear();
-    this.appRepeatable.forEach(o => {
+    this.appRepeatableOf.forEach(o => {
       this.container.createEmbeddedView(
         this.template,
-        {item: o}
+        {'$implicit': o}
       )
     });
   }

@@ -21,6 +21,10 @@
 
 <div *appStructural="items.length > 3">More than 3 elements</div>
 
-<ng-template [appRepeatable]="items" let-item="item">
+<ng-template [appRepeatableOf]="items" let-item>
   <div>#{{item.id}} {{item.name}}</div>
 </ng-template>
+
+<div *appRepeatable="let item of items">
+  {{item.id}} {{item.name}}
+</div>
