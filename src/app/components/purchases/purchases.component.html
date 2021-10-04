@@ -9,9 +9,12 @@
 <!--(appAttributeChange)="attribute=$event"-->
 <app-purchase-list
   [(appAttribute)]="attribute"
+  #attr="appAttribute"
   [items]="items"
   (removeItem)="onRemoveItem($event)"
 ></app-purchase-list>
+
+{{attr.value}}
 
 <ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
 </ng-template>

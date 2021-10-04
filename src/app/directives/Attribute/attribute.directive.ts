@@ -1,25 +1,17 @@
-import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  HostListener,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 @Directive({
   selector: '[appAttribute]',
+  exportAs: 'appAttribute',
 })
 export class AttributeDirective {
   @Input() @HostBinding('attr.data-id') appAttribute = '';
   @Output() appAttributeChange = new EventEmitter<string>();
+  value = 'secret';
 
   // DI
-  constructor() {}
+  constructor() {
+  }
 
   @HostListener('mouseenter')
   onEnter() {
