@@ -8,6 +8,7 @@ import { PurchaseListComponent } from './components/purchase-list/purchase-list.
 import { PurchaseListItemComponent } from './components/purchase-list-item/purchase-list-item.component';
 import { AttributeDirective } from './directives/Attribute/attribute.directive';
 import { StructuralDirective } from './directives/structural/structural.directive';
+import { RepeatableDirective } from './directives/repeatable/repeatable.directive';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { StructuralDirective } from './directives/structural/structural.directiv
     PurchaseListItemComponent,
     AttributeDirective,
     StructuralDirective,
+    RepeatableDirective,
   ],
   imports: [
     BrowserModule,

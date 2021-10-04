@@ -20,3 +20,7 @@
 </ng-template>
 
 <div *appStructural="items.length > 3">More than 3 elements</div>
+
+<ng-template [appRepeatable]="items" let-item="item">
+  <div>#{{item.id}} {{item.name}}</div>
+</ng-template>
