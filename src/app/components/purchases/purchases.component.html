@@ -1,3 +1,14 @@
+<app-purchase-list
+  [(appAttribute)]="attribute"
+  #attr="appAttribute"
+  [items]="items"
+  (removeItem)="onRemoveItem($event)"
+></app-purchase-list>
+
+<app-purchase-edit-form></app-purchase-edit-form>
+
+{{attr.value}}
+
 <ng-template #itemCountInfo let-count="count">
   {{count}}
 </ng-template>
@@ -7,14 +18,6 @@
 
 <!--[appAttribute]="attribute"-->
 <!--(appAttributeChange)="attribute=$event"-->
-<app-purchase-list
-  [(appAttribute)]="attribute"
-  #attr="appAttribute"
-  [items]="items"
-  (removeItem)="onRemoveItem($event)"
-></app-purchase-list>
-
-{{attr.value}}
 
 <ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
 </ng-template>

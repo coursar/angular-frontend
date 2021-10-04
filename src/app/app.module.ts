@@ -11,6 +11,9 @@ import { StructuralDirective } from './directives/structural/structural.directiv
 import { RepeatableDirective } from './directives/repeatable/repeatable.directive';
 import { AComponent } from './components/a/a.component';
 import { BComponent } from './components/b/b.component';
+import { PurchaseEditFormComponent } from './components/purchase-edit-form/purchase-edit-form.component';
+import { FormsModule } from '@angular/forms';
+import { PriceValidatorDirective } from './validators/price/price-validator.directive';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,13 @@ import { BComponent } from './components/b/b.component';
     RepeatableDirective,
     AComponent,
     BComponent,
+    PurchaseEditFormComponent,
+    PriceValidatorDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
