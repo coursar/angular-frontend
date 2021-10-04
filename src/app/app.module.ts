@@ -9,6 +9,8 @@ import { PurchaseListItemComponent } from './components/purchase-list-item/purch
 import { AttributeDirective } from './directives/Attribute/attribute.directive';
 import { StructuralDirective } from './directives/structural/structural.directive';
 import { RepeatableDirective } from './directives/repeatable/repeatable.directive';
+import { AComponent } from './components/a/a.component';
+import { BComponent } from './components/b/b.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { RepeatableDirective } from './directives/repeatable/repeatable.directiv
     AttributeDirective,
     StructuralDirective,
     RepeatableDirective,
+    AComponent,
+    BComponent,
   ],
   imports: [
     BrowserModule,
