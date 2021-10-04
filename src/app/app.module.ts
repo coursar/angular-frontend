@@ -7,6 +7,7 @@ import { PurchasesComponent } from './components/purchases/purchases.component';
 import { PurchaseListComponent } from './components/purchase-list/purchase-list.component';
 import { PurchaseListItemComponent } from './components/purchase-list-item/purchase-list-item.component';
 import { AttributeDirective } from './directives/Attribute/attribute.directive';
+import { StructuralDirective } from './directives/structural/structural.directive';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AttributeDirective } from './directives/Attribute/attribute.directive';
     PurchaseListComponent,
     PurchaseListItemComponent,
     AttributeDirective,
+    StructuralDirective,
   ],
   imports: [
     BrowserModule,
