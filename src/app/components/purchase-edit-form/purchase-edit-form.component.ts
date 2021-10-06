@@ -11,6 +11,10 @@ import { PurchaseDto } from '../../dto/purchase-dto';
 })
 export class PurchaseEditFormComponent extends AbstractFormComponent implements OnInit {
   @Input() set item(value: PurchaseDto) {
+    if (this.form?.dirty) {
+      alert('are you sure?');
+      return;
+    }
     this.model = new PurchaseModel(value.id, value.name, `${value.price}`);
   }
   model = new PurchaseModel(
@@ -45,6 +49,12 @@ export class PurchaseEditFormComponent extends AbstractFormComponent implements 
   }
 
   onSave() {
+    if (this.form?.invalid) {
+      // TODO: show modal
+      alert('please enter');
+      return;
+    }
+
     this.save.emit({
       ...this.model,
       name: this.model.name.trim(),
