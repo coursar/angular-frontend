@@ -1,3 +1,8 @@
+<div>
+  <div [class.hidden]="!listLoading">Loading...</div>
+  <button [class.hidden]="!listError" (click)="onReload()">Reload</button>
+</div>
+
 <app-purchase-list
   [(appAttribute)]="attribute"
   #attr="appAttribute"
@@ -6,29 +11,27 @@
   (removeItem)="onRemoveItem($event)"
 ></app-purchase-list>
 
-<app-purchase-edit-form (save)="onSave($event)"></app-purchase-edit-form>
+<app-purchase-edit-form (save)="onSave($event)" [loading]="itemSaveLoading"></app-purchase-edit-form>
 
-{{attr.value}}
+<!--<ng-template #itemCountInfo let-count="count">-->
+<!--  {{count}}-->
+<!--</ng-template>-->
 
-<ng-template #itemCountInfo let-count="count">
-  {{count}}
-</ng-template>
+<!--<ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">-->
+<!--</ng-template>-->
 
-<ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
-</ng-template>
+<!--&lt;!&ndash;[appAttribute]="attribute"&ndash;&gt;-->
+<!--&lt;!&ndash;(appAttributeChange)="attribute=$event"&ndash;&gt;-->
 
-<!--[appAttribute]="attribute"-->
-<!--(appAttributeChange)="attribute=$event"-->
+<!--<ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">-->
+<!--</ng-template>-->
 
-<ng-template *ngTemplateOutlet="itemCountInfo; context: {count: items.length}">
-</ng-template>
+<!--<div *appStructural="items.length > 3">More than 3 elements</div>-->
 
-<div *appStructural="items.length > 3">More than 3 elements</div>
+<!--<ng-template [appRepeatableOf]="items" let-item>-->
+<!--  <div>#{{item.id}} {{item.name}}</div>-->
+<!--</ng-template>-->
 
-<ng-template [appRepeatableOf]="items" let-item>
-  <div>#{{item.id}} {{item.name}}</div>
-</ng-template>
-
-<div *appRepeatable="let item of items">
-  {{item.id}} {{item.name}}
-</div>
+<!--<div *appRepeatable="let item of items">-->
+<!--  {{item.id}} {{item.name}}-->
+<!--</div>-->

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {SubjectService} from "../../services/subject/subject.service";
 
 @Component({
   selector: 'app-a',
@@ -8,10 +9,15 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 export class AComponent implements OnInit {
   @Output() change = new EventEmitter<string>();
   @Input() item = '';
+  current?: string;
 
-  constructor() { }
+  constructor(private service: SubjectService) { }
 
   ngOnInit(): void {
+    this.service.getData().subscribe(evt => {
+      this.current = evt;
+      console.log(evt)
+    });
   }
 
   onClick() {

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {SubjectService} from "../../services/subject/subject.service";
 
 @Component({
   selector: 'app-b',
@@ -9,7 +10,7 @@ export class BComponent implements OnInit {
   @Output() change = new EventEmitter<string>();
   @Input() item = '';
 
-  constructor() {
+  constructor(private service: SubjectService) {
   }
 
   ngOnInit(): void {
@@ -17,5 +18,6 @@ export class BComponent implements OnInit {
 
   onClick() {
     this.change.emit('B');
+    this.service.passData(new Date().toUTCString());
   }
 }

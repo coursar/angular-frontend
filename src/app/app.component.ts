@@ -1,6 +1,18 @@
-import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { AComponent } from './components/a/a.component';
-import { BComponent } from './components/b/b.component';
+import {
+  AfterViewInit,
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {AComponent} from './components/a/a.component';
+import {BComponent} from './components/b/b.component';
+import {fromEvent, of} from "rxjs";
+import {catchError, debounceTime, filter, map, switchMap} from "rxjs/operators";
+import {ajax} from "rxjs/ajax";
 
 @Component({
   selector: 'app-root',
@@ -9,37 +21,43 @@ import { BComponent } from './components/b/b.component';
 })
 // Alt + Insert -> generation
 // Alt + Enter -> fix
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('container', {static: true, read: ViewContainerRef})
   container?: ViewContainerRef;
-  componentRef?: ComponentRef<any>;
+  @ViewChild('tplSearch', {static: true}) search?: ElementRef<HTMLInputElement>
 
   constructor(private resolver: ComponentFactoryResolver) {
   }
 
-  onAddComponentA() {
-    this.container?.clear();
-    const factory = this.resolver.resolveComponentFactory(AComponent);
-    this.componentRef = this.container?.createComponent(factory);
-    // FIXME: unsubscribe
-    if (this.componentRef) {
-      this.componentRef.instance.item = 'value';
-      this.componentRef.instance.change.subscribe((ev: string) => {
-        console.log(ev);
-      });
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    if (this.search) {
+      fromEvent(this.search.nativeElement, 'input')
+        .pipe(
+          debounceTime(100),
+          map(o => (o!.target as HTMLInputElement).value),
+          filter(o => o.trim() !== ''),
+          switchMap(
+            o => ajax(`http://localhost:8080/api/search?text=${o}`)
+              .pipe(
+                map(o => o.response),
+                catchError(err => of([]))
+              )
+          ),
+        )
+        .subscribe(evt => console.log(evt));
     }
   }
 
+  onAddComponentA() {
+    const factory = this.resolver.resolveComponentFactory(AComponent);
+    this.container?.createComponent(factory);
+  }
+
   onAddComponentB() {
-    this.container?.clear();
     const factory = this.resolver.resolveComponentFactory(BComponent);
-    this.componentRef = this.container?.createComponent(factory);
-    // FIXME: unsubscribe
-    if (this.componentRef) {
-      this.componentRef.instance.item = 'value';
-      this.componentRef.instance.change.subscribe((ev: string) => {
-        console.log(ev);
-      });
-    }
+    this.container?.createComponent(factory);
   }
 }

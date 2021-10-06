@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { PurchaseModel } from '../../models/purchase-model';
-import { NgForm, NgModel } from '@angular/forms';
-import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
-import { PurchaseDto } from '../../dto/purchase-dto';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {PurchaseModel} from '../../models/purchase-model';
+import {NgForm, NgModel} from '@angular/forms';
+import {AbstractFormComponent} from '../abstract-form/abstract-form.component';
+import {PurchaseDto} from '../../dto/purchase-dto';
 
 @Component({
   selector: 'app-purchase-edit-form',
@@ -17,17 +17,23 @@ export class PurchaseEditFormComponent extends AbstractFormComponent implements 
     }
     this.model = new PurchaseModel(value.id, value.name, `${value.price}`);
   }
+
   model = new PurchaseModel(
     // id = 0 - new item, id != 0 - existing item
     0,
     '',
     '',
   );
+  @Input() loading = false;
   @Output() save = new EventEmitter<PurchaseDto>();
   @ViewChild(NgForm) form?: NgForm;
 
   constructor() {
     super();
+  }
+
+  resetForm() {
+    this.form?.resetForm();
   }
 
   ngOnInit(): void {
@@ -60,9 +66,5 @@ export class PurchaseEditFormComponent extends AbstractFormComponent implements 
       name: this.model.name.trim(),
       price: Number(this.model.price.trim())
     });
-
-    if (this.form) {
-      this.form.resetForm();
-    }
   }
 }

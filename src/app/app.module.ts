@@ -14,6 +14,7 @@ import { BComponent } from './components/b/b.component';
 import { PurchaseEditFormComponent } from './components/purchase-edit-form/purchase-edit-form.component';
 import { FormsModule } from '@angular/forms';
 import { PriceValidatorDirective } from './validators/price/price-validator.directive';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { PriceValidatorDirective } from './validators/price/price-validator.dire
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

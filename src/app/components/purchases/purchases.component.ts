@@ -1,28 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { PurchaseDto } from '../../dto/purchase-dto';
-import { PurchaseEditFormComponent } from '../purchase-edit-form/purchase-edit-form.component';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {PurchaseDto} from '../../dto/purchase-dto';
+import {PurchaseEditFormComponent} from '../purchase-edit-form/purchase-edit-form.component';
+import {PurchasesService} from "../../services/purchases/purchases.service";
 
 @Component({
   selector: 'app-purchases',
   templateUrl: './purchases.component.html',
   styleUrls: ['./purchases.component.css'],
 })
-export class PurchasesComponent implements OnInit {
+export class PurchasesComponent implements OnInit, OnDestroy {
   attribute = '';
   items: PurchaseDto[] = [];
   @ViewChild(PurchaseEditFormComponent) editForm?: PurchaseEditFormComponent;
+  listLoading = false;
+  listError: string | null = null;
 
-  constructor() {
+  itemSaveLoading = false;
+  itemSaveError: string | null = null;
+
+  constructor(private service: PurchasesService) {
   }
 
+  // xhr, fetch -> !2xx
+  // ajax (RxJS), HttpClient (Angular)
   ngOnInit(): void {
-    for (let i = 0; i < 5; i++) {
-      this.items.push(new PurchaseDto(
-        i + 1,
-        'Water',
-        100 + i,
-      ));
-    }
+    this.loadData();
+    this.service.getReload().subscribe(
+      value => this.loadData(),
+    );
+  }
+
+  ngOnDestroy() {
   }
 
   onRemoveItem($event: PurchaseDto) {
@@ -40,12 +48,43 @@ export class PurchasesComponent implements OnInit {
   }
 
   onSave($event: PurchaseDto) {
-    debugger;
-    if ($event.id === 0) {
-      $event.id = Date.now(); // demo stuff
-      this.items.push($event);
-      return;
-    }
-    this.items = this.items.map(o => o.id !== $event.id ? o : $event);
+    this.itemSaveLoading = true;
+    this.service.save($event).subscribe(
+      data => {
+        this.itemSaveLoading = false;
+        const index = this.items.findIndex(o => o.id === data.id);
+        if (index !== -1) {
+          this.items[index] = data;
+          return;
+        }
+        this.items.push(data);
+        this.editForm?.resetForm();
+      },
+      error => {
+        console.log(error)
+        this.itemSaveLoading = false;
+        this.itemSaveError = error.message;
+      },
+    );
+  }
+
+  onReload() {
+    this.loadData();
+  }
+
+  private loadData() {
+    this.listLoading = true;
+    this.listError = null;
+    this.service.getAll().subscribe(
+      data => {
+        this.listLoading = false;
+        this.items = data
+      },
+      error => {
+        this.listLoading = false;
+        console.log(error)
+        this.listError = error.message;
+      },
+    );
   }
 }
