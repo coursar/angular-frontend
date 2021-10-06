@@ -45,14 +45,14 @@ export class PurchaseEditFormComponent extends AbstractFormComponent implements 
   }
 
   onSave() {
-    if (this.form) {
-      this.form.resetForm();
-    }
-
     this.save.emit({
       ...this.model,
       name: this.model.name.trim(),
       price: Number(this.model.price.trim())
     });
+
+    if (this.form) {
+      this.form.resetForm();
+    }
   }
 }
