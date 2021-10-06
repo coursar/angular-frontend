@@ -8,11 +8,16 @@ import { PurchaseDto } from '../../dto/purchase-dto';
 })
 export class PurchaseListComponent implements OnInit {
   @Input() items: PurchaseDto[] = [];
+  @Output() editItem = new EventEmitter<PurchaseDto>();
   @Output() removeItem = new EventEmitter<PurchaseDto>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onEditItem($event: PurchaseDto) {
+    this.editItem.emit($event);
   }
 
   onRemoveItem($event: PurchaseDto) {

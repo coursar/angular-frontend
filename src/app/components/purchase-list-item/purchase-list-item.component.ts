@@ -9,10 +9,15 @@ import { PurchaseDto } from '../../dto/purchase-dto';
 export class PurchaseListItemComponent implements OnInit {
   @Input() item?: PurchaseDto;
   @Output() remove = new EventEmitter<PurchaseDto>();
+  @Output() edit = new EventEmitter<PurchaseDto>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onEdit() {
+    this.edit.emit(this.item);
   }
 
   onRemove() {

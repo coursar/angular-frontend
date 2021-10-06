@@ -2,10 +2,11 @@
   [(appAttribute)]="attribute"
   #attr="appAttribute"
   [items]="items"
+  (editItem)="onEditItem($event)"
   (removeItem)="onRemoveItem($event)"
 ></app-purchase-list>
 
-<app-purchase-edit-form></app-purchase-edit-form>
+<app-purchase-edit-form (save)="onSave($event)"></app-purchase-edit-form>
 
 {{attr.value}}
 
