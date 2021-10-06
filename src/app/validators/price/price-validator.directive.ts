@@ -16,7 +16,6 @@ export class PriceValidatorDirective implements Validator {
   constructor() { }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    debugger;
     const value = Number(control.value);
     if (typeof this.appPriceValidator === 'string') {
       const price = Number(this.appPriceValidator);

@@ -15,7 +15,6 @@
   <ng-container *ngIf="isInvalid(tplName)">
     <span *ngIf="tplName.errors?.required">Field is required</span>
     <span *ngIf="tplName.errors?.minlength">Minimal length is {{tplName?.errors?.minlength?.requiredLength}}</span>
-    <span *ngIf="tplName.errors?.pattern">Required pattern is {{tplName?.errors?.pattern?.requiredPattern}}</span>
     <span *ngIf="tplName.errors?.appPriceValidator">Invalid price. Must be lower than {{tplName?.errors?.appPriceValidator?.requiredPrice}}</span>
   </ng-container>
   <input
