@@ -1,34 +1,49 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
+import {AuthModel} from "../../models/auth-model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  static readonly ANONYMOUS = 'anonymous';
-  private subject$: BehaviorSubject<string>;
-  get state(): Observable<string> {
+  private subject$: BehaviorSubject<AuthModel>;
+  get state(): Observable<AuthModel> {
     return this.subject$.asObservable();
+  }
+  get current(): AuthModel {
+    return this.subject$.getValue();
   }
 
   constructor() {
     console.log('init');
-    const item = localStorage.getItem('token');
-    if (item === null) {
-      localStorage.setItem('token', AuthService.ANONYMOUS);
+    const saved = localStorage.getItem('token');
+    const item = saved === null ? AuthModel.ANONYMOUS : AuthService.decode(saved);
+    if (item !== AuthModel.ANONYMOUS) {
+      localStorage.setItem('token', JSON.stringify(AuthModel.ANONYMOUS));
     }
-    this.subject$ = new BehaviorSubject<string>(item ?? AuthService.ANONYMOUS);
+    this.subject$ = new BehaviorSubject<AuthModel>(item);
+  }
+
+  private static decode(saved: string): AuthModel {
+    try {
+      return JSON.parse(saved) as AuthModel;
+    } catch (e) {
+      return AuthModel.ANONYMOUS;
+    }
   }
 
   login(token: string) {
-    localStorage.setItem('token', token);
-    if (token !== this.subject$.getValue()) {
-      this.subject$.next(token);
+    // TODO: http request
+    const item = token === 'anonymous' ? AuthModel.ANONYMOUS : new AuthModel(1, 'admin', token, ['ROLE_ADMIN']);
+
+    localStorage.setItem('token', JSON.stringify(item));
+    if (token !== this.subject$.getValue().token) {
+      this.subject$.next(item);
     }
   }
 
   logout() {
-    localStorage.setItem('token', AuthService.ANONYMOUS);
-    this.subject$.next(AuthService.ANONYMOUS);
+    localStorage.setItem('token', JSON.stringify(AuthModel.ANONYMOUS));
+    this.subject$.next(AuthModel.ANONYMOUS);
   }
 }

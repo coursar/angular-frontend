@@ -4,7 +4,7 @@ import {Observable, of, Subject, Subscription} from "rxjs";
 import {PurchaseDto} from "../../dto/purchase-dto";
 import {environment} from "../../../environments/environment";
 import {AuthService} from "../auth/auth.service";
-import {distinct, switchMap} from "rxjs/operators";
+import {catchError, distinct, map, switchMap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,9 @@ export class PurchasesService implements OnDestroy {
     this.auth$ = auth.state
       .pipe(
         // distinct(),
-        switchMap(o => this.getAll())
+        switchMap(o => this.getAll().pipe(
+          catchError(() => of([]))
+        ))
       )
       .subscribe(
         value => {
@@ -41,7 +43,7 @@ export class PurchasesService implements OnDestroy {
 
   save(item: PurchaseDto): Observable<PurchaseDto> {
     // FIXME:
-    return of(new PurchaseDto(0, '', 0));
+    return of(new PurchaseDto(0, 1, '', 0));
     // return this.http.post<PurchaseDto>(`${environment.apiUrl}/purchases`, item)
     //   .pipe(
     //     tap(() => this.subject$.next(true))

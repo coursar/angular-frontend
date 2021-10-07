@@ -1,6 +1,14 @@
 <app-purchases></app-purchases>
 
-<span>{{principal}}</span>
+<span>{{principal?.username}}</span>
+<app-authenticated>
+  <button (click)="onLogout()">Logout</button>
+</app-authenticated>
 
-<button (click)="onLogin()">Login</button>
-<button (click)="onLogout()">Logout</button>
+<ng-container *ngIf="principal?.roles?.includes('ROLE_ANONYMOUS')">
+  <button (click)="onLogin()">Login</button>
+</ng-container>
+
+<app-authorized [roles]="['ROLE_ADMIN']">
+  show buttons for admin
+</app-authorized>

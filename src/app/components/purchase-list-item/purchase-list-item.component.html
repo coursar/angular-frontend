@@ -4,6 +4,8 @@
   <span>{{item.price | customCurrency : 'р.' : placeEnum.RIGHT}}</span>
   |
   <span>{{item | customJSON}}</span>
-  <button (click)="onEdit()">Edit</button>
-  <button (click)="onRemove()">Remove</button>
+  <app-owner [object]="item">
+    <button (click)="onEdit()">Edit</button>
+    <button (click)="onRemove()">Remove</button>
+  </app-owner>
 </div>

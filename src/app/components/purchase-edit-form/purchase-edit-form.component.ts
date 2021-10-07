@@ -15,11 +15,12 @@ export class PurchaseEditFormComponent extends AbstractFormComponent implements 
       alert('are you sure?');
       return;
     }
-    this.model = new PurchaseModel(value.id, value.name, `${value.price}`);
+    this.model = new PurchaseModel(value.id, value.id, value.name, `${value.price}`);
   }
 
   model = new PurchaseModel(
     // id = 0 - new item, id != 0 - existing item
+    0,
     0,
     '',
     '',

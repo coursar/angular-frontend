@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "./services/auth/auth.service";
 import {Observable, Subscription} from "rxjs";
+import {AuthModel} from "./models/auth-model";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import {Observable, Subscription} from "rxjs";
 // Alt + Enter -> fix
 export class AppComponent implements OnInit, OnDestroy {
   subscription$?: Subscription;
-  principal?: string;
+  principal?: AuthModel;
 
   constructor(private auth: AuthService) {
     this.subscription$ = auth.state.subscribe(

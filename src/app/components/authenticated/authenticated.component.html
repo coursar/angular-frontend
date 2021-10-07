@@ -1,0 +1,3 @@
+<ng-container *ngIf="!principal?.roles?.includes('ROLE_ANONYMOUS')">
+  <ng-content></ng-content>
+</ng-container>
