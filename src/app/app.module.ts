@@ -26,6 +26,14 @@ import {takeUntil} from "rxjs/operators";
 import { AuthenticatedComponent } from './components/authenticated/authenticated.component';
 import { AuthorizedComponent } from './components/authorized/authorized.component';
 import { OwnerComponent } from './components/owner/owner.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { CabinetPageComponent } from './pages/cabinet-page/cabinet-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { GroupsPageComponent } from './pages/groups-page/groups-page.component';
+import { GroupPageComponent } from './pages/group-page/group-page.component';
+import {SharedModule} from "./modules/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -48,12 +56,20 @@ import { OwnerComponent } from './components/owner/owner.component';
     AuthenticatedComponent,
     AuthorizedComponent,
     OwnerComponent,
+    DashboardPageComponent,
+    LoginPageComponent,
+    RegistrationPageComponent,
+    CabinetPageComponent,
+    ProfilePageComponent,
+    GroupsPageComponent,
+    GroupPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SharedModule,
   ],
   providers: [
     {

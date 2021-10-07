@@ -1,14 +1,3 @@
-<app-purchases></app-purchases>
+<router-outlet></router-outlet>
 
-<span>{{principal?.username}}</span>
-<app-authenticated>
-  <button (click)="onLogout()">Logout</button>
-</app-authenticated>
-
-<ng-container *ngIf="principal?.roles?.includes('ROLE_ANONYMOUS')">
-  <button (click)="onLogin()">Login</button>
-</ng-container>
-
-<app-authorized [roles]="['ROLE_ADMIN']">
-  show buttons for admin
-</app-authorized>
+<app-button></app-button>

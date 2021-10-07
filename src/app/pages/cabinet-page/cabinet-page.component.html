@@ -1,0 +1,15 @@
+<p>cabinet-page works!</p>
+
+<ul>
+  <li>
+    <a routerLink="/cabinet">Dashboard</a>
+  </li>
+  <li>
+    <a routerLink="/cabinet/groups">Groups</a>
+  </li>
+  <li>
+    <a [routerLink]="['/cabinet/groups', 10]">Groups</a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>
