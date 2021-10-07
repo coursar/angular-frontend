@@ -35,22 +35,17 @@ export class PurchasesComponent implements OnInit, OnDestroy, AfterViewInit {
   subscription$?: Subscription;
   principal?: string;
 
-  constructor(private service: PurchasesService, private auth: AuthService) {
-    this.subscription$ = auth.state.subscribe(
-      auth => this.principal = auth,
+  constructor(private service: PurchasesService) {
+    this.subscription$ = service.state.subscribe(
+      value => this.items = value,
     );
   }
 
-  // xhr, fetch -> !2xx
-  // ajax (RxJS), HttpClient (Angular)
   ngOnInit(): void {
-    this.loadData();
-    this.service.getReload().subscribe(
-      value => this.loadData(),
-    );
   }
 
   ngOnDestroy() {
+    this.subscription$?.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -98,16 +93,16 @@ export class PurchasesComponent implements OnInit, OnDestroy, AfterViewInit {
   private loadData() {
     this.listLoading = true;
     this.listError = null;
-    this.service.getAll().subscribe(
-      data => {
-        this.listLoading = false;
-        this.items = data
-      },
-      error => {
-        this.listLoading = false;
-        console.log(error)
-        this.listError = error.message;
-      },
-    );
+    // this.service.getAll().subscribe(
+    //   data => {
+    //     this.listLoading = false;
+    //     this.items = data
+    //   },
+    //   error => {
+    //     this.listLoading = false;
+    //     console.log(error)
+    //     this.listError = error.message;
+    //   },
+    // );
   }
 }

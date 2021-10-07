@@ -22,7 +22,9 @@ export class AuthService {
 
   login(token: string) {
     localStorage.setItem('token', token);
-    this.subject$.next(token);
+    if (token !== this.subject$.getValue()) {
+      this.subject$.next(token);
+    }
   }
 
   logout() {
