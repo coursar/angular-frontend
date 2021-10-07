@@ -15,6 +15,8 @@ import {PurchaseEditFormComponent} from '../purchase-edit-form/purchase-edit-for
 import {PurchasesService} from "../../services/purchases/purchases.service";
 import {DemoComponent} from "../demo/demo.component";
 import {AComponent} from "../a/a.component";
+import {AuthService} from "../../services/auth/auth.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-purchases',
@@ -30,8 +32,13 @@ export class PurchasesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   itemSaveLoading = false;
   itemSaveError: string | null = null;
+  subscription$?: Subscription;
+  principal?: string;
 
-  constructor(private service: PurchasesService) {
+  constructor(private service: PurchasesService, private auth: AuthService) {
+    this.subscription$ = auth.state.subscribe(
+      auth => this.principal = auth,
+    );
   }
 
   // xhr, fetch -> !2xx

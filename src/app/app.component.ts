@@ -1,4 +1,6 @@
-import {Component, ComponentFactoryResolver, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AuthService} from "./services/auth/auth.service";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -7,10 +9,28 @@ import {Component, ComponentFactoryResolver, OnInit} from '@angular/core';
 })
 // Alt + Insert -> generation
 // Alt + Enter -> fix
-export class AppComponent implements OnInit {
-  constructor(private resolver: ComponentFactoryResolver) {
+export class AppComponent implements OnInit, OnDestroy {
+  subscription$?: Subscription;
+  principal?: string;
+
+  constructor(private auth: AuthService) {
+    this.subscription$ = auth.state.subscribe(
+      auth => this.principal = auth,
+    );
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy() {
+    this.subscription$?.unsubscribe();
+  }
+
+  onLogin() {
+    this.auth.login('top-secret');
+  }
+
+  onLogout() {
+    this.auth.logout();
   }
 }
