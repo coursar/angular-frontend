@@ -1,3 +1,12 @@
 <router-outlet></router-outlet>
 
+<span>{{likes$ | async}}</span>
+
+<button (click)="onLike()">Like</button>
+<button (click)="onDislike()">Dislike</button>
+
 <app-button></app-button>
+
+<ng-template #tplContainer>
+
+</ng-template>

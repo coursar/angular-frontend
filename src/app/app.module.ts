@@ -34,6 +34,11 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { GroupsPageComponent } from './pages/groups-page/groups-page.component';
 import { GroupPageComponent } from './pages/group-page/group-page.component';
 import {SharedModule} from "./modules/shared/shared.module";
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { InputFieldComponent } from './components/forms/input-field/input-field.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +68,7 @@ import {SharedModule} from "./modules/shared/shared.module";
     ProfilePageComponent,
     GroupsPageComponent,
     GroupPageComponent,
+    InputFieldComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +76,8 @@ import {SharedModule} from "./modules/shared/shared.module";
     FormsModule,
     HttpClientModule,
     SharedModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
     {
