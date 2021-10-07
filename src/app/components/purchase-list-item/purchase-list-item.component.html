@@ -1,5 +1,9 @@
 <div *ngIf="item">
   <span>{{item.name}}</span>
+  |
+  <span>{{item.price | customCurrency : 'р.' : placeEnum.RIGHT}}</span>
+  |
+  <span>{{item | customJSON}}</span>
   <button (click)="onEdit()">Edit</button>
   <button (click)="onRemove()">Remove</button>
 </div>

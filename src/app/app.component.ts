@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ComponentFactoryResolver,
-  ComponentRef,
   ElementRef,
   OnInit,
   ViewChild,
@@ -13,6 +12,7 @@ import {BComponent} from './components/b/b.component';
 import {fromEvent, of} from "rxjs";
 import {catchError, debounceTime, filter, map, switchMap} from "rxjs/operators";
 import {ajax} from "rxjs/ajax";
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-root',

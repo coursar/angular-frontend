@@ -11,7 +11,15 @@
   (removeItem)="onRemoveItem($event)"
 ></app-purchase-list>
 
-<app-purchase-edit-form (save)="onSave($event)" [loading]="itemSaveLoading"></app-purchase-edit-form>
+<app-inner>
+  <div class="title">
+    <h2>Title</h2>
+  </div>
+  <app-purchase-edit-form (save)="onSave($event)" [loading]="itemSaveLoading"></app-purchase-edit-form>
+</app-inner>
+
+<app-demo></app-demo>
+
 
 <!--<ng-template #itemCountInfo let-count="count">-->
 <!--  {{count}}-->

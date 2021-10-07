@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { PurchaseDto } from '../../dto/purchase-dto';
+import {PlaceEnum} from "../../enums/place-enum";
 
 @Component({
   selector: 'app-purchase-list-item',
@@ -10,6 +11,7 @@ export class PurchaseListItemComponent implements OnInit {
   @Input() item?: PurchaseDto;
   @Output() remove = new EventEmitter<PurchaseDto>();
   @Output() edit = new EventEmitter<PurchaseDto>();
+  placeEnum = PlaceEnum;
 
   constructor() { }
 
@@ -17,7 +19,10 @@ export class PurchaseListItemComponent implements OnInit {
   }
 
   onEdit() {
-    this.edit.emit(this.item);
+    if (this.item) {
+      this.item.price -= 1000;
+    }
+    // this.edit.emit(this.item);
   }
 
   onRemove() {

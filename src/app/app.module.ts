@@ -15,6 +15,11 @@ import { PurchaseEditFormComponent } from './components/purchase-edit-form/purch
 import { FormsModule } from '@angular/forms';
 import { PriceValidatorDirective } from './validators/price/price-validator.directive';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { NameDirective } from './validators/name/name.directive';
+import { InnerComponent } from './components/inner/inner.component';
+import { DemoComponent } from './components/demo/demo.component';
+import { CustomJSONPipe } from './pipes/custom-json.pipe';
+import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +34,11 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     BComponent,
     PurchaseEditFormComponent,
     PriceValidatorDirective,
+    NameDirective,
+    InnerComponent,
+    DemoComponent,
+    CustomJSONPipe,
+    CustomCurrencyPipe,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SubjectService} from "../../services/subject/subject.service";
 
 @Component({
@@ -11,7 +11,8 @@ export class AComponent implements OnInit {
   @Input() item = '';
   current?: string;
 
-  constructor(private service: SubjectService) { }
+  constructor(private service: SubjectService) {
+  }
 
   ngOnInit(): void {
     this.service.getData().subscribe(evt => {

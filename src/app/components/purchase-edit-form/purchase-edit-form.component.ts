@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PurchaseModel} from '../../models/purchase-model';
-import {NgForm, NgModel} from '@angular/forms';
+import {NgForm, NgModel, Validators} from '@angular/forms';
 import {AbstractFormComponent} from '../abstract-form/abstract-form.component';
 import {PurchaseDto} from '../../dto/purchase-dto';
 
@@ -52,6 +52,10 @@ export class PurchaseEditFormComponent extends AbstractFormComponent implements 
   }
 
   onDraft() {
+    this.form?.controls['name'].addValidators([Validators.email]);
+    this.form?.controls['name'].updateValueAndValidity();
+    console.log(this.form?.controls['name'].errors);
+    console.log(this.form?.invalid);
   }
 
   onSave() {

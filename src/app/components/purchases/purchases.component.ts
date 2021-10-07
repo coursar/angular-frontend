@@ -1,14 +1,27 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ContentChild,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {PurchaseDto} from '../../dto/purchase-dto';
 import {PurchaseEditFormComponent} from '../purchase-edit-form/purchase-edit-form.component';
 import {PurchasesService} from "../../services/purchases/purchases.service";
+import {DemoComponent} from "../demo/demo.component";
+import {AComponent} from "../a/a.component";
 
 @Component({
   selector: 'app-purchases',
   templateUrl: './purchases.component.html',
   styleUrls: ['./purchases.component.css'],
 })
-export class PurchasesComponent implements OnInit, OnDestroy {
+export class PurchasesComponent implements OnInit, OnDestroy, AfterViewInit {
   attribute = '';
   items: PurchaseDto[] = [];
   @ViewChild(PurchaseEditFormComponent) editForm?: PurchaseEditFormComponent;
@@ -31,6 +44,9 @@ export class PurchasesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+  }
+
+  ngAfterViewInit() {
   }
 
   onRemoveItem($event: PurchaseDto) {
